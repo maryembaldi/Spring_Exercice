@@ -2,6 +2,8 @@ package tn.esprit.foyer_maryem_baldi.DAO.Entites;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.Set;
+
 import lombok.*;
 
 @Data
@@ -19,4 +21,7 @@ public class Reservation {
     private String idReservation;
     private Date anneeUniversitaire;
     private Boolean estValide;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    Set<Etudiant> etudiants;
 }

@@ -3,6 +3,8 @@ package tn.esprit.foyer_maryem_baldi.DAO.Entites;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.Set;
+
 import lombok.*;
 
 @Data
@@ -10,6 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+
+@Builder
 
 @Entity
 @Table(name = "Etudiant")
@@ -24,5 +28,8 @@ public class Etudiant {
     private long cin;
     private String ecole;
     private Date dateNaissance;
+
+    @ManyToMany(mappedBy="etudiants", cascade = CascadeType.ALL)
+    private Set<Reservation> reservations;
 
 }
