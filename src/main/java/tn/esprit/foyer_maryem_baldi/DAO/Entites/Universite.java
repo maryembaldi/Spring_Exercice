@@ -1,9 +1,14 @@
 package tn.esprit.foyer_maryem_baldi.DAO.Entites;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table(name = "Universite")
+@Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class Universite {
     @Id
@@ -16,4 +21,6 @@ public class Universite {
 
     @OneToOne
     Foyer foyer;
+
+
 }
