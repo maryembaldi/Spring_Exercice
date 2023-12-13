@@ -1,8 +1,6 @@
 package tn.esprit.foyer_maryem_baldi.DAO.Controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.foyer_maryem_baldi.DAO.Entites.Chambre;
@@ -13,16 +11,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/Chambre")
 public class ChambreController {
-    @Autowired
+
     ChambreService chambreService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("getAllChambres")
     public ResponseEntity<List<Chambre>> getAllChambres(){
         List<Chambre> chambres = chambreService.getAllChambres();
         return new ResponseEntity<>(chambres, HttpStatus.OK);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("addChambre")
     public ResponseEntity<Chambre> addChambre(@RequestBody Chambre chambre){
         Chambre addedChambre = chambreService.addChambre(chambre);
         return new ResponseEntity<>(addedChambre, HttpStatus.CREATED);
@@ -34,7 +32,7 @@ public class ChambreController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces =  MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/{id}")
     public ResponseEntity<Chambre> modifyChambre(@RequestBody Chambre chambre, @PathVariable long id){
         Chambre modifiedChambre = chambreService.modifyChambre(chambre, id);
         return new ResponseEntity<>(modifiedChambre, HttpStatus.ACCEPTED);

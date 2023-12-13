@@ -1,9 +1,7 @@
 package tn.esprit.foyer_maryem_baldi.DAO.Controllers;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.foyer_maryem_baldi.DAO.Entites.Etudiant;
@@ -14,16 +12,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/Etudiant")
 public class EtudiantController {
-    @Autowired
     EtudiantService etudiantService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("getAllEtudiant")
     public ResponseEntity<List<Etudiant>> getAllEtudiant(){
         List<Etudiant> e = etudiantService.getAllEtudiants();
         return new  ResponseEntity<List<Etudiant>>(e, HttpStatus.OK);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("ajouterEtudiant")
     public ResponseEntity<Etudiant> ajouterEtudiant(@RequestBody Etudiant e){
         Etudiant etudiantAjouter = etudiantService.addEtudiant(e);
         return new ResponseEntity<Etudiant>(etudiantAjouter,HttpStatus.CREATED);
@@ -35,7 +32,7 @@ public class EtudiantController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces =  MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/{id}")
     public ResponseEntity<Etudiant> modiferEudiant(@RequestBody Etudiant e,@PathVariable long id){
         Etudiant etudiant = etudiantService.modifyEtudiant(e,id);
         return new ResponseEntity<Etudiant>(etudiant,HttpStatus.ACCEPTED);

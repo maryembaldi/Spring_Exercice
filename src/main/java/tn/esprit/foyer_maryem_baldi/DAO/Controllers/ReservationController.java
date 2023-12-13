@@ -1,9 +1,7 @@
 package tn.esprit.foyer_maryem_baldi.DAO.Controllers;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.foyer_maryem_baldi.DAO.Entites.Reservation;
@@ -14,16 +12,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/Reservation")
 public class ReservationController {
-    @Autowired
+
     ReservationService reservationService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("getAllReservations")
     public ResponseEntity<List<Reservation>> getAllReservations(){
         List<Reservation> reservations = reservationService.getAllReservations();
         return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("addReservation")
     public ResponseEntity<Reservation> addReservation(@RequestBody Reservation reservation){
         Reservation addedReservation = reservationService.addReservation(reservation);
         return new ResponseEntity<>(addedReservation, HttpStatus.CREATED);
@@ -35,7 +33,7 @@ public class ReservationController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces =  MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/{id}")
     public ResponseEntity<Reservation> modifyReservation(@RequestBody Reservation reservation, @PathVariable String id){
         Reservation modifiedReservation = reservationService.modifyReservation(reservation, id);
         return new ResponseEntity<>(modifiedReservation, HttpStatus.ACCEPTED);

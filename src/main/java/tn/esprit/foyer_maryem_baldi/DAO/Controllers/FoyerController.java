@@ -1,8 +1,6 @@
 package tn.esprit.foyer_maryem_baldi.DAO.Controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.foyer_maryem_baldi.DAO.Entites.Foyer;
@@ -14,16 +12,16 @@ import java.util.List;
 @RequestMapping("/Foyer")
 
 public class FoyerController {
-    @Autowired
+
     FoyerService foyerService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("getAllFoyers")
     public ResponseEntity<List<Foyer>> getAllFoyers(){
         List<Foyer> foyers = foyerService.getAllFoyers();
         return new ResponseEntity<>(foyers, HttpStatus.OK);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("addFoyer")
     public ResponseEntity<Foyer> addFoyer(@RequestBody Foyer foyer){
         Foyer addedFoyer = foyerService.addFoyer(foyer);
         return new ResponseEntity<>(addedFoyer, HttpStatus.CREATED);
@@ -35,7 +33,7 @@ public class FoyerController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces =  MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/{id}")
     public ResponseEntity<Foyer> modifyFoyer(@RequestBody Foyer foyer, @PathVariable long id){
         Foyer modifiedFoyer = foyerService.modifyFoyer(foyer, id);
         return new ResponseEntity<>(modifiedFoyer, HttpStatus.ACCEPTED);
